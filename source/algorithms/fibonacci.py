@@ -7,7 +7,7 @@ def fib_trace(n):
         if k <= 1:
             steps.append(("return", k))
             return k
-        val = fib(n - 1) + fib(n - 2)
+        val = fib(k - 1) + fib(k - 2)
         steps.append(("return", k))
         return val
 
