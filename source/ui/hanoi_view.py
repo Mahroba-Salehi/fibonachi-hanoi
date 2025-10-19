@@ -6,7 +6,7 @@ class HanoiView:
         self.canvas.pack()
         self.num_disks = num_disks
         self.rods = [list(range(num_disks, 0, -1)), [], []]
-        self.colors = ["#ff6666", "#66ccff", "#99ff99", "#ffcc66", "#cc99ff"]
+        self.colors = ["#D487BA", "#656EC8", "#BB8744", "#9ED487", "#87D4D2"]
         self.draw()
 
     def draw(self):
