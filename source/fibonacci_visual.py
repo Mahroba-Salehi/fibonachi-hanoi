@@ -3,7 +3,7 @@ from algorithms.fibonacci import fib_trace
 from ui.stack_view import StackView
 
 class FibonacciVisualizer:
-    def __init__(self, root, n=5, delay=700):
+    def __init__(self, root, n=5, delay=1200):
         self.root = root
         self.delay = delay
         self.steps = fib_trace(n)
@@ -21,4 +21,4 @@ class FibonacciVisualizer:
             self.step_index += 1
             self.root.after(self.delay, self.animate)
         else:
-            tk.Label(self.root, text="✅ Fibonacci Done!", font=("Arial", 16)).pack(pady=10)
+            tk.Label(self.root, text=" Fibonacci Done!", font=("Arial", 16)).pack(pady=10)

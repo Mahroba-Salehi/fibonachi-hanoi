@@ -1,22 +1,30 @@
-import tkinter as tk
 from algorithms.hanoi import hanoi_moves
 from ui.hanoi_view import HanoiView
+import tkinter as tk
 
 class HanoiVisualizer:
-    def __init__(self, root, n=3, delay=800):
-        self.root = root
-        self.delay = delay
+    def __init__(self, master, n=3, delay=700):
+        self.master = master
         self.n = n
+        self.delay = delay
+        self.rods = [list(range(n, 0, -1)), [], []]
+        self.call_stack = []
         self.moves = hanoi_moves(n)
-        self.step_index = 0
-        self.hanoi_view = HanoiView(root, n)
+        self.step = 0
+        self.view = HanoiView(master, n)
         self.animate()
 
     def animate(self):
-        if self.step_index < len(self.moves):
-            src, tgt = self.moves[self.step_index]
-            self.hanoi_view.move_disk(src, tgt)
-            self.step_index += 1
-            self.root.after(self.delay, self.animate)
+        if self.step < len(self.moves):
+            src, tgt = self.moves[self.step]
+            self.call_stack.append(f"Move {src}->{tgt}")
+            if self.rods[src]:
+                disk = self.rods[src].pop()
+                self.rods[tgt].append(disk)
+            self.view.draw_scene(self.rods, self.call_stack)
+            if len(self.call_stack) > 6:
+                self.call_stack.pop(0)
+            self.step += 1
+            self.master.after(self.delay, self.animate)
         else:
-            tk.Label(self.root, text="🎉 Tower of Hanoi Done!", font=("Arial", 16)).pack(pady=10)
+            self.view.show_done()
